@@ -17,8 +17,9 @@ RUN pip install --no-cache-dir \
     "fastapi>=0.115" \
     "uvicorn[standard]>=0.34"
 
-# Copy application code
+# Copy application code and install the package
 COPY src/ src/
+RUN pip install --no-cache-dir --no-deps .
 
 EXPOSE 8080
 CMD ["sh", "-c", "uvicorn gridfinity_server.main:app --host 0.0.0.0 --port ${PORT:-8080}"]
